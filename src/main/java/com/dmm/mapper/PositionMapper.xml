@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dmm.mapper.PositionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dmm.pojo.Position">
+        <id column="position_id" property="positionId"/>
+        <result column="position_name" property="positionName"/>
+    </resultMap>
+    <select id="getPage" parameterType="com.dmm.utils.Page" resultMap="BaseResultMap">
+        select * from position
+        limit #{index}, #{currentCount}
+    </select>
+    <select id="getCount" parameterType="com.dmm.utils.Page" resultType="java.lang.Integer">
+        select count(*) from position
+    </select>
+
+</mapper>
