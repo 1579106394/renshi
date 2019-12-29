@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -24,18 +25,28 @@ public class Money implements Serializable {
      * 工资
      */
     @TableField("money_price")
-    private Double moneyPrice;
+    private BigDecimal moneyPrice;
     /**
      * 试用期折扣
      */
     @TableField("money_discount")
-    private Double moneyDiscount;
+    private BigDecimal moneyDiscount;
     /**
      * 用户id
      */
     @TableField("money_user")
     private String moneyUser;
 
+    @TableField(exist = false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getMoneyId() {
         return moneyId;
@@ -45,19 +56,19 @@ public class Money implements Serializable {
         this.moneyId = moneyId;
     }
 
-    public Double getMoneyPrice() {
+    public BigDecimal getMoneyPrice() {
         return moneyPrice;
     }
 
-    public void setMoneyPrice(Double moneyPrice) {
+    public void setMoneyPrice(BigDecimal moneyPrice) {
         this.moneyPrice = moneyPrice;
     }
 
-    public Double getMoneyDiscount() {
+    public BigDecimal getMoneyDiscount() {
         return moneyDiscount;
     }
 
-    public void setMoneyDiscount(Double moneyDiscount) {
+    public void setMoneyDiscount(BigDecimal moneyDiscount) {
         this.moneyDiscount = moneyDiscount;
     }
 

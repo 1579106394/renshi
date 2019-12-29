@@ -4,17 +4,44 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.dmm.pojo.Recruitment">
-        <id column="id" property="id" />
-        <result column="position" property="position" />
-        <result column="number" property="number" />
-        <result column="requirements" property="requirements" />
-        <result column="createtime" property="createtime" />
-        <result column="status" property="status" />
+        <id column="id" property="id"/>
+        <result column="position" property="position"/>
+        <result column="number" property="number"/>
+        <result column="requirements" property="requirements"/>
+        <result column="createtime" property="createtime"/>
+        <result column="status" property="status"/>
+        <association property="p" resultMap="com.dmm.mapper.PositionMapper.BaseResultMap"/>
     </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, position, number, requirements, createtime, status
-    </sql>
+    <select id="getPage" parameterType="com.dmm.utils.Page" resultMap="BaseResultMap">
+        select * from recruitment
+        left join position on recruitment.position = position_id
+        <where>
+            <if test="params.positionName!=null and params.positionName!=''">
+                and position_name like '%${params.positionName}%'
+            </if>
+            <if test="params.status!=null and params.status!=''">
+                and status = #{params.status}
+            </if>
+            <if test="params.createtime!=null and params.createtime!=''">
+                and createtime <![CDATA[<]]> #{params.createtime}
+            </if>
+        </where>
+        limit #{index}, #{currentCount}
+    </select>
+    <select id="getCount" parameterType="com.dmm.utils.Page" resultType="java.lang.Integer">
+        select count(*) from recruitment
+        left join position on recruitment.position = position_id
+        <where>
+            <if test="params.positionName!=null and params.positionName!=''">
+                and position_name like '%${params.positionName}%'
+            </if>
+            <if test="params.status!=null and params.status!=''">
+                and status = #{params.status}
+            </if>
+            <if test="params.createtime!=null and params.createtime!=''">
+                and createtime <![CDATA[<]]> #{params.createtime}
+            </if>
+        </where>
+    </select>
 
 </mapper>

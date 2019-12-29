@@ -4,16 +4,11 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.dmm.pojo.Study">
-        <id column="study_id" property="studyId" />
-        <result column="study_title" property="studyTitle" />
-        <result column="study_content" property="studyContent" />
-        <result column="study_time" property="studyTime" />
-        <result column="study_user" property="studyUser" />
+        <id column="study_id" property="studyId"/>
+        <result column="study_title" property="studyTitle"/>
+        <result column="study_content" property="studyContent"/>
+        <result column="study_time" property="studyTime"/>
+        <result column="study_user" property="studyUser"/>
     </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        study_id, study_title, study_content, study_time, study_user
-    </sql>
 
 </mapper>

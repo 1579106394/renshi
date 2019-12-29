@@ -69,6 +69,13 @@
 
                         </a>
                     </li>
+                    <li>
+                        <a _href="${pageContext.request.contextPath}/recruitment/list.action">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>招聘列表</cite>
+
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>
@@ -96,6 +103,22 @@
                         <a _href="${pageContext.request.contextPath}/postionChange/list.action">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>职位变动</cite>
+
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>财务管理</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="${pageContext.request.contextPath}/money/list.action">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>工资管理</cite>
 
                         </a>
                     </li>

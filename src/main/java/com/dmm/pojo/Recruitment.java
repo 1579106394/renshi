@@ -1,5 +1,6 @@
 package com.dmm.pojo;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
@@ -23,6 +24,8 @@ public class Recruitment implements Serializable {
      * 职位
      */
     private String position;
+    @TableField(exist = false)
+    private Position p;
     /**
      * 招聘数量
      */
@@ -38,8 +41,15 @@ public class Recruitment implements Serializable {
     /**
      * 是否招聘结束。1已结束，0未结束
      */
-    private String status;
+    private Integer status;
 
+    public Position getP() {
+        return p;
+    }
+
+    public void setP(Position p) {
+        this.p = p;
+    }
 
     public Integer getId() {
         return id;
@@ -81,23 +91,23 @@ public class Recruitment implements Serializable {
         this.createtime = createtime;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
         return "Recruitment{" +
-        ", id=" + id +
-        ", position=" + position +
-        ", number=" + number +
-        ", requirements=" + requirements +
-        ", createtime=" + createtime +
-        ", status=" + status +
-        "}";
+                ", id=" + id +
+                ", position=" + position +
+                ", number=" + number +
+                ", requirements=" + requirements +
+                ", createtime=" + createtime +
+                ", status=" + status +
+                "}";
     }
 }

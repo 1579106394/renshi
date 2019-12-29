@@ -1,13 +1,10 @@
 package com.dmm.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.dmm.mapper.PositionMapper;
 import com.dmm.mapper.PostionChangeMapper;
-import com.dmm.pojo.Leave;
 import com.dmm.pojo.PostionChange;
 import com.dmm.service.PostionChangeService;
 import com.dmm.utils.Page;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,9 +19,6 @@ import java.util.List;
  */
 @Service
 public class PostionChangeServiceImpl extends ServiceImpl<PostionChangeMapper, PostionChange> implements PostionChangeService {
-
-    @Autowired
-    private PositionMapper positionMapper;
 
     @Override
     public Page<PostionChange> page(Page<PostionChange> page) {
