@@ -111,7 +111,7 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>财务管理</cite>
+                    <cite>人事管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
@@ -119,6 +119,20 @@
                         <a _href="${pageContext.request.contextPath}/money/list.action">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>工资管理</cite>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="${pageContext.request.contextPath}/moneyLog/list.action">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>工资记录</cite>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="${pageContext.request.contextPath}/study/list.action">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>学习讨论</cite>
 
                         </a>
                     </li>

@@ -1,10 +1,12 @@
 package com.dmm.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.dmm.pojo.Money;
 import com.dmm.pojo.Position;
 import com.dmm.pojo.PostionChange;
 import com.dmm.pojo.User;
 import com.dmm.service.LeaveService;
+import com.dmm.service.MoneyService;
 import com.dmm.service.PositionService;
 import com.dmm.service.PostionChangeService;
 import com.dmm.service.UserService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +45,8 @@ public class UserController {
     private PostionChangeService changeService;
     @Autowired
     private LeaveService leaveService;
+    @Autowired
+    private MoneyService moneyService;
 
     /**
      * 登录
@@ -195,6 +200,12 @@ public class UserController {
         u.setFormal(1);
         u.setFormalTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         userService.updateById(u);
+        // 查询该用户工资条，折扣改为1
+        Money money = moneyService.selectOne(new EntityWrapper<Money>().eq("money_user", user.getUsername()));
+        if (money != null) {
+            money.setMoneyDiscount(new BigDecimal(1));
+            moneyService.updateById(money);
+        }
         return new R(200, "转正成功！", null);
     }
 

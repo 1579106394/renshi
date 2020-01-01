@@ -26,49 +26,41 @@
 <body>
 <div class="x-body layui-anim layui-anim-up">
     <form class="layui-form" method="post">
-        <input type="hidden" name="id" value="${recruitment.id}">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
-                <span class="x-red">*</span>招聘人数
+                <span class="x-red">*</span>标题
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_username" name="number" required lay-verify="number"
-                       autocomplete="off" class="layui-input" value="${recruitment.number}">
+                <input type="text" id="L_username" name="studyTitle" required lay-verify="studyTitle"
+                       autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
-                <span class="x-red">*</span>招聘部门
+                <span class="x-red">*</span>参与成员
             </label>
             <div class="layui-input-inline">
-                <select name="position" lay-verify="required">
-                    <c:forEach items="${positionList}" var="position">
-                        <c:if test="${recruitment.position == position.positionId}">
-                            <option value="${position.positionId}" selected>${position.positionName}</option>
-                        </c:if>
-                        <c:if test="${recruitment.position != position.positionId}">
-                            <option value="${position.positionId}">${position.positionName}</option>
-                        </c:if>
-                    </c:forEach>
-                </select>
+                <c:forEach items="${userList}" var="user" varStatus="index">
+                    <input type="checkbox" name="studyUser" title="${user.name}" value="${user.username}">
+                </c:forEach>
             </div>
         </div>
-<div class="layui-form-item">
-    <label for="L_username" class="layui-form-label">
-        <span class="x-red">*</span>招聘要求
-    </label>
-    <div class="layui-input-inline">
-        <textarea name="requirements" class="layui-textarea">${recruitment.requirements}</textarea>
-    </div>
-</div>
-<div class="layui-form-item">
-    <label for="L_username" class="layui-form-label">
-    </label>
-    <button class="layui-btn" lay-filter="add" lay-submit="">
-        修改
-    </button>
-</div>
-</form>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+                <span class="x-red">*</span>学习内容
+            </label>
+            <div class="layui-input-inline">
+                <textarea name="studyContent" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+            </label>
+            <button class="layui-btn" lay-filter="add" lay-submit="">
+                增加
+            </button>
+        </div>
+    </form>
 </div>
 <script>
     layui.use('laydate', function () {
@@ -86,9 +78,18 @@
 
         //监听提交
         form.on('submit(add)', function (data) {
+            //获取checkbox[name='foodId']的值，获取所有选中的复选框，并将其值放入数组中
+            var arr = [];
+            $("input:checkbox[name='studyUser']:checked").each(function (i) {
+                arr[i] = $(this).val();
+            });
+            if (arr.length > 0) {
+                //  替换 data.field.foodId的数据为拼接后的字符串
+                data.field.studyUser = "'" + arr.join("','") + "'";//将数组合并成字符串
+            }
             console.log(JSON.stringify(data.field));
             $.ajax({
-                url: "${pageContext.request.contextPath}/recruitment/update.action",
+                url: "${pageContext.request.contextPath}/study/add.action",
                 data: JSON.stringify(data.field),
                 contentType: "application/json;charset=UTF-8",
                 type: "post",
@@ -100,7 +101,7 @@
                             var index = parent.layer.getFrameIndex(window.name);
                             //关闭当前frame
                             parent.layer.close(index);
-                            parent.location.href = "${pageContext.request.contextPath}/recruitment/list.action"
+                            parent.location.href = "${pageContext.request.contextPath}/study/list.action"
                         });
                     }
                 }

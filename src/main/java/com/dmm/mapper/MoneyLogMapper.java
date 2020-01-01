@@ -2,6 +2,9 @@ package com.dmm.mapper;
 
 import com.dmm.pojo.MoneyLog;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.dmm.utils.Page;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface MoneyLogMapper extends BaseMapper<MoneyLog> {
 
+    List<MoneyLog> getPage(Page<MoneyLog> page);
+
+    int getCount(Page<MoneyLog> page);
 }

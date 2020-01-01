@@ -89,4 +89,6 @@ public class Money implements Serializable {
         ", moneyUser=" + moneyUser +
         "}";
     }
+
+
 }

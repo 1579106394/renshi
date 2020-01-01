@@ -9,6 +9,30 @@
         <result column="study_content" property="studyContent"/>
         <result column="study_time" property="studyTime"/>
         <result column="study_user" property="studyUser"/>
+        <collection property="userList" resultMap="com.dmm.mapper.UserMapper.BaseResultMap"/>
     </resultMap>
+    <select id="getPage" parameterType="com.dmm.utils.Page" resultMap="BaseResultMap">
+        select * from study
+        <where>
+            <if test="params.studyTitle!=null and params.studyTitle!=''">
+                and study_title like '%${params.studyTitle}%'
+            </if>
+            <if test="params.studyTime!=null and params.studyTime!=''">
+                and study_time <![CDATA[<]]> #{params.studyTime}
+            </if>
+        </where>
+        limit #{index}, #{currentCount}
+    </select>
+    <select id="getCount" parameterType="com.dmm.utils.Page" resultType="java.lang.Integer">
+        select count(*) from study
+        <where>
+            <if test="params.studyTitle!=null and params.studyTitle!=''">
+                and study_title like '%${params.studyTitle}%'
+            </if>
+            <if test="params.studyTime!=null and params.studyTime!=''">
+                and study_time <![CDATA[<]]> #{params.studyTime}
+            </if>
+        </where>
+    </select>
 
 </mapper>

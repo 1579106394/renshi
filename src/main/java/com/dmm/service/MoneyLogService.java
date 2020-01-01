@@ -2,6 +2,7 @@ package com.dmm.service;
 
 import com.dmm.pojo.MoneyLog;
 import com.baomidou.mybatisplus.service.IService;
+import com.dmm.utils.Page;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface MoneyLogService extends IService<MoneyLog> {
 
+    Page<MoneyLog> page(Page<MoneyLog> page);
 }

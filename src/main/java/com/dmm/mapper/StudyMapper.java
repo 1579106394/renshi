@@ -2,6 +2,9 @@ package com.dmm.mapper;
 
 import com.dmm.pojo.Study;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.dmm.utils.Page;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface StudyMapper extends BaseMapper<Study> {
 
+    List<Study> getPage(Page<Study> page);
+
+    int getCount(Page<Study> page);
 }

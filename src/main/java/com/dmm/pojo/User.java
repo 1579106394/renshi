@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * <p>
@@ -206,5 +207,28 @@ public class User implements Serializable {
                 ", leave=" + leave +
                 ", position=" + position +
                 "}";
+    }
+
+    /**
+     * 重写equals和hashCode，username相同就视为这是同一个数据。
+     * 代码是idea生成的
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return username.equals(user.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }

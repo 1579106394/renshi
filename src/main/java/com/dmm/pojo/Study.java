@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -41,6 +42,16 @@ public class Study implements Serializable {
     @TableField("study_user")
     private String studyUser;
 
+    @TableField(exist = false)
+    private List<User> userList;
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 
     public Integer getStudyId() {
         return studyId;
@@ -85,11 +96,11 @@ public class Study implements Serializable {
     @Override
     public String toString() {
         return "Study{" +
-        ", studyId=" + studyId +
-        ", studyTitle=" + studyTitle +
-        ", studyContent=" + studyContent +
-        ", studyTime=" + studyTime +
-        ", studyUser=" + studyUser +
-        "}";
+                ", studyId=" + studyId +
+                ", studyTitle=" + studyTitle +
+                ", studyContent=" + studyContent +
+                ", studyTime=" + studyTime +
+                ", studyUser=" + studyUser +
+                "}";
     }
 }

@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * <p>
@@ -26,7 +28,7 @@ public class MoneyLog implements Serializable {
      * 实发工资
      */
     @TableField("log_money")
-    private Double logMoney;
+    private BigDecimal logMoney;
     /**
      * 发给员工id
      */
@@ -36,18 +38,28 @@ public class MoneyLog implements Serializable {
      * 加班工资
      */
     @TableField("log_add")
-    private Double logAdd;
+    private BigDecimal logAdd;
     /**
      * 扣除工资
      */
     @TableField("log_deduct")
-    private Double logDeduct;
+    private BigDecimal logDeduct;
     /**
      * 发工资时间
      */
     @TableField("log_time")
     private String logTime;
 
+    @TableField(exist = false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getLogId() {
         return logId;
@@ -57,11 +69,11 @@ public class MoneyLog implements Serializable {
         this.logId = logId;
     }
 
-    public Double getLogMoney() {
+    public BigDecimal getLogMoney() {
         return logMoney;
     }
 
-    public void setLogMoney(Double logMoney) {
+    public void setLogMoney(BigDecimal logMoney) {
         this.logMoney = logMoney;
     }
 
@@ -73,19 +85,19 @@ public class MoneyLog implements Serializable {
         this.logUser = logUser;
     }
 
-    public Double getLogAdd() {
+    public BigDecimal getLogAdd() {
         return logAdd;
     }
 
-    public void setLogAdd(Double logAdd) {
+    public void setLogAdd(BigDecimal logAdd) {
         this.logAdd = logAdd;
     }
 
-    public Double getLogDeduct() {
+    public BigDecimal getLogDeduct() {
         return logDeduct;
     }
 
-    public void setLogDeduct(Double logDeduct) {
+    public void setLogDeduct(BigDecimal logDeduct) {
         this.logDeduct = logDeduct;
     }
 
@@ -100,12 +112,36 @@ public class MoneyLog implements Serializable {
     @Override
     public String toString() {
         return "MoneyLog{" +
-        ", logId=" + logId +
-        ", logMoney=" + logMoney +
-        ", logUser=" + logUser +
-        ", logAdd=" + logAdd +
-        ", logDeduct=" + logDeduct +
-        ", logTime=" + logTime +
-        "}";
+                ", logId=" + logId +
+                ", logMoney=" + logMoney +
+                ", logUser=" + logUser +
+                ", logAdd=" + logAdd +
+                ", logDeduct=" + logDeduct +
+                ", logTime=" + logTime +
+                "}";
+    }
+
+    /**
+     * 重写equals。当月份和用户相同时视为两个对象相同
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MoneyLog moneyLog = (MoneyLog) o;
+        return logUser.equals(moneyLog.logUser) &&
+                logTime.equals(moneyLog.logTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(logUser, logTime);
     }
 }

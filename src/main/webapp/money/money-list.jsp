@@ -85,6 +85,10 @@
         </form>
     </div>
     <xblock>
+        <button class="layui-btn"
+                onclick="money()">
+            <i class="layui-icon"></i>发工资
+        </button>
         <span class="x-right" style="line-height:40px">共有数据：${page.totalCount} 条</span>
     </xblock>
     <table class="layui-table">
@@ -205,6 +209,21 @@
                             window.location.href = "${pageContext.request.contextPath}/money/list.action"
                         });
                     }
+                }
+            });
+        });
+    }
+
+    function money() {
+        layer.confirm('该功能会为每个员工发放工资，是否操作？', function (index) {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/moneyLog/addAll.action",
+                type: "get",
+                dataType: "json",
+                success: function (dep) {
+                    layer.alert(dep.msg, {icon: 6}, function () {
+                        window.location.href = "${pageContext.request.contextPath}/moneyLog/list.action"
+                    });
                 }
             });
         });
