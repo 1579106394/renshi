@@ -80,7 +80,7 @@ public class UserController {
     @RequestMapping("/logout.action")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
-        return "login";
+        return "redirect:/login.jsp";
     }
 
     /**

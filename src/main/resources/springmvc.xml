@@ -24,15 +24,15 @@
         <property name="maxInMemorySize" value="1"/>
     </bean>
 
-<!--    <mvc:interceptors>-->
-<!--        &lt;!&ndash;配置跨域拦截器&ndash;&gt;-->
-<!--        <mvc:interceptor>-->
-<!--            &lt;!&ndash;拦截所有&ndash;&gt;-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            <bean class="com.fzy.boke.interceptor.LoginInterceptor"/>-->
-<!--        </mvc:interceptor>-->
+    <mvc:interceptors>
+        <!--配置跨域拦截器-->
+        <mvc:interceptor>
+            <!--拦截所有-->
+            <mvc:mapping path="/**"/>
+            <bean class="com.dmm.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
 
-<!--    </mvc:interceptors>-->
+    </mvc:interceptors>
 
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

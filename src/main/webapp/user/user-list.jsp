@@ -114,7 +114,9 @@
                 <td>${user.name}</td>
                 <td>${user.age}</td>
                 <td>${user.sex}</td>
-                <td>${user.img}</td>
+                <td>
+                    <img src="${pageContext.request.contextPath}${user.img}" alt="" width="100px" height="100px">
+                </td>
                 <td>${user.userPosition.positionName}</td>
                 <td>${user.role==3?"超级管理员":user.role==2?"人事":"员工"}</td>
                 <td>${user.startTime}</td>

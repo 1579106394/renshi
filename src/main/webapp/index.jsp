@@ -29,9 +29,9 @@
     </div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
+            <a href="javascript:;">${sessionScope.user.name}</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                <dd><a onClick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
+<%--                <dd><a onClick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>--%>
                 <dd><a href="${pageContext.request.contextPath}/user/logout.action">退出</a></dd>
             </dl>
         </li>

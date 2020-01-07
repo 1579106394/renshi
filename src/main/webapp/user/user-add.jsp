@@ -26,6 +26,7 @@
 <body>
 <div class="x-body layui-anim layui-anim-up">
     <form class="layui-form" method="post">
+        <input type="hidden" id="userImg" name="img">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
                 <span class="x-red">*</span>姓名
@@ -95,6 +96,24 @@
         </div>
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
+                <span class="x-red">*</span>头像
+            </label>
+            <div class="layui-input-inline">
+                <img id="header" src=""
+                     alt="" height="100px" width="100px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+            </label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" id="uploadImg">
+                    <i class="layui-icon">&#xe67c;</i>上传图片
+                </button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
                 <span class="x-red">*</span>简介
             </label>
             <div class="layui-input-inline">
@@ -117,6 +136,22 @@
         //执行一个laydate实例
         laydate.render({
             elem: '#start' //指定元素
+        });
+    });
+    layui.use('upload', function () {
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#uploadImg' //绑定元素
+            , url: '${pageContext.request.contextPath}/uploadImg.action' //上传接口
+            , done: function (res) {
+                //上传完毕回调
+                $("#userImg").val(res.url)
+                var url = '${pageContext.request.contextPath}' + res.url;
+                console.log(url)
+                $("#header").attr('src', url)
+            }
         });
     });
     layui.use(['form', 'layer'], function () {
